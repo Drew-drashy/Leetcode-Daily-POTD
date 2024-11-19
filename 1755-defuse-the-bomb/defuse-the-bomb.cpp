@@ -8,7 +8,7 @@ public:
             int wsum=accumulate(code.begin()+1, code.begin()+k+1, 0);
             ans[0]=wsum;
             for(int l=1, r=k+1; l<n ; r++, l++){
-                wsum+=-code[l]+code[r%n];
+                wsum+=-code[l%n]+code[r%n];
                 ans[l]=wsum;
             }
             return ans;
@@ -18,7 +18,7 @@ public:
         int wsum=accumulate(code.end()-k , code.end(), 0);
         ans[0]=wsum;
         for(int r=0, l=n-k; r<n-1; r++, l++){
-            wsum+=-code[l%n]+code[r];
+            wsum+=-code[l%n]+code[r%n];
             ans[r+1]=wsum;
         }
         return ans;
