@@ -1,33 +1,20 @@
 class Solution {
 public:
     vector<int> getFinalState(vector<int>& nums, int k, int multiplier) {
-        int n=nums.size();
-        vector<int>ans(n,0);
-        // 2,0  1,1  3,2  5,3  6,4  
-        //       2
-        //  4
-        //        4    
-        //             6
-        //   8               
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
-        for(int i=0;i<nums.size();i++){
-            pq.push({nums[i],i});
-        }
-        while(k--){
-            auto it=pq.top();
-            int val=it.first;
-            int ind=it.second;
-            pq.pop();
-            pq.push({val*multiplier,ind});
-        }
-        while(!pq.empty()){
-            auto it=pq.top();
-            int val=pq.top().first;
-            int ind=pq.top().second;
-            ans[ind]=val;
-            pq.pop();
+        int n = nums.size();
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minHeap;
+
+        for(int i=0;i<n;i++){
+            minHeap.push({nums[i],i});
         }
 
-        return ans;
+        while(k){
+            auto [value,index] = minHeap.top();
+            nums[index] = nums[index]*multiplier;
+            minHeap.pop();
+            minHeap.push({nums[index],index});
+            k--;
+        }
+        return nums;
     }
 };
