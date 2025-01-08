@@ -1,26 +1,27 @@
 class Solution {
 public:
-    bool fun(string &a, string &b){
-        int n=a.size();
-        
-        int m=b.size();
-        if(n>m) return false;
-        string k=b.substr(0,n);
-        string p=b.substr(m-n);
-        cout<<k<<" "<<p<<"\n";
-        if(a==k && a==p) return true;
-        return false;
-    }
     int countPrefixSuffixPairs(vector<string>& words) {
-        int n=words.size();
-        int cnt=0;
-        for(int i=0;i<n-1;i++){
-            for(int j=i+1;j<n;j++){
-                if(fun(words[i],words[j])){
-                    cnt++;
-                }
-            }
+        int length = words.size();
+        
+        int numPairs = 0;
+        for (int i = 0; i < length; ++i) {
+            for (int j = i + 1; j < length; ++j)
+                numPairs += isPrefixSuffix(words[i], words[j]);
         }
-        return cnt;
+
+        return numPairs;        
+    }
+
+    bool isPrefixSuffix(string word1, string word2) {
+        int length1 = word1.length(), length2 = word2.length();
+
+        if (length1 > length2)
+            return false;
+
+        bool flag = true;
+        for (int l1 = 0, r1 = length1 - 1, l2 = 0, r2 = length2 - 1; l1 < length1 && r1 >= 0 && l2 < length2 && r2 >= 0 && flag; ++l1, --r1, ++l2, --r2)
+            flag = (word1[l1] == word2[l2]) && (word1[r1] == word2[r2]);
+        
+        return flag;
     }
 };
