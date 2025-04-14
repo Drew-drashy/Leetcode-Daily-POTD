@@ -2,16 +2,20 @@ class Solution {
 public:
     int countGoodTriplets(vector<int>& arr, int a, int b, int c) {
         int n=arr.size();
-        int mini=min({a,b,c});
         int cnt=0;
-        for(int i=0;i<arr.size();i++){
-            for(int j=i+1;j<n;j++){
-                for(int k=j+1;k<n;k++){
-                    if(abs(arr[i]-arr[j])<=a && abs(arr[j]-arr[k])<=b && abs(arr[i]-arr[k])<=c){
-                        cnt++;
-                    }
+        for(int i=0;i<arr.size()-2;i++){
+           const int x=arr[i];
+           for(int j=i+1;j<n-1;j++){
+            const int y=arr[j];
+            if(abs(x-y)>a) continue;
+            for(int k=j+1;k<n;k++){
+                const int z=arr[k];
+                if(abs(y-z)>b) continue;
+                if(abs(x-z)<=c){
+                    cnt++;
                 }
             }
+           }
         }
         return cnt;
 
