@@ -38,13 +38,13 @@ public:
                 
             
         }
-        for(auto it: rightClosetL ){
-            cout<<it<<" ";
-        }
-        cout<<"\n";
-        for(auto it: leftClosetR ){
-            cout<<it<<" ";
-        }
+        // for(auto it: rightClosetL ){
+        //     cout<<it<<" ";
+        // }
+        // cout<<"\n";
+        // for(auto it: leftClosetR ){
+        //     cout<<it<<" ";
+        // }
         for(int i=0;i<n;i++){
             if(leftClosetR[i]==-1 && rightClosetL[i]==-1) continue;
             else if(leftClosetR[i]==-1) {str[i]='L';continue;}
