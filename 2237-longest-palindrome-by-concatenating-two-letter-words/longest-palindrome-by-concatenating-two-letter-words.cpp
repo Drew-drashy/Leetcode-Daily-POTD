@@ -22,8 +22,8 @@ public:
             else if(mp.find(k)!=mp.end()){
                 int op=min(cnt,mp[k]);
                 ans+=op*4;
-                mp[w]-=op;
-                mp[k]-=op;
+                mp[w]=0;
+                mp[k]=0;
             }
 
 
