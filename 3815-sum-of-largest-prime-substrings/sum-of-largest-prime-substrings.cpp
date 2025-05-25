@@ -1,37 +1,44 @@
 class Solution {
 public:
-    bool isPrime(long long n) {
-        if (n < 2) return false;
-        if (n == 2) return true;
-        if (n % 2 == 0) return false;
-        for (long long i = 3; i * i <= n; i += 2) {
-            if (n % i == 0) return false;
+    // Convert string to number safely (avoid pow)
+    long long convert(const string &k) {
+        long long ans = 0;
+        for (char ch : k) {
+            ans = ans * 10 + (ch - '0');
+        }
+        return ans;
+    }
+
+    // Check if a number is prime
+    bool check(long long num) {
+        if (num < 2) return false;
+        for (long long i = 2; i * i <= num; i++) {
+            if (num % i == 0) return false;
         }
         return true;
     }
 
     long long sumOfLargestPrimes(string s) {
-        unordered_set<long long> uniqueNumbers;
-
-        // Generate all substrings and insert into the set
-        int len = s.length();
-        for (int i = 0; i < len; ++i) {
-            string sub = "";
-            for (int j = i; j < len; ++j) {
-                sub += s[j];
-                long long num = stoll(sub); // handles leading zeros
-                uniqueNumbers.insert(num);
-            }
-        }
-
+        int n = s.size();
+        unordered_set<long long> seen;
         vector<long long> primes;
-        for (auto num : uniqueNumbers) {
-            if (isPrime(num)) {
-                primes.push_back(num);
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 1; j <= n - i; j++) {
+                string k = s.substr(i, j);
+                long long num = convert(k);
+                if (seen.count(num) == 0) {
+                    seen.insert(num);
+                    if (check(num)) {
+                        primes.push_back(num);
+                    }
+                }
             }
         }
 
-        // Sort in descending order
+        if (primes.empty()) return 0;
+
+        // Sort descending to get top 3 primes
         sort(primes.rbegin(), primes.rend());
 
         long long sum = 0;
