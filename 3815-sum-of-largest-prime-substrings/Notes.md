@@ -1,1 +1,1 @@
-<h2>sum-of-largest-prime-substrings Notes</h2><hr>[ Time taken: 32 m 19 s ]
+<h2>sum-of-largest-prime-substrings Notes</h2><hr>[ Time taken: 14 m 49 s ]
