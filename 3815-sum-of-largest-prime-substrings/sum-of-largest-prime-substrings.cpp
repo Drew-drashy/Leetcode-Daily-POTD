@@ -24,8 +24,8 @@ public:
         vector<long long> primes;
 
         for (int i = 0; i < n; i++) {
-            for (int j = 1; j <= n - i; j++) {
-                string k = s.substr(i, j);
+            for (int j = i; j <n ; j++) {
+                string k = s.substr(i, j-i+1);
                 long long num = convert(k);
                 if (seen.count(num) == 0) {
                     seen.insert(num);
